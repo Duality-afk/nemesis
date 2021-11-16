@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block dashactive %}active{% endblock dashactive %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% for message in messages %}
+
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Hey User!</strong> {{message}}
+  <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="background: transparent; border: none; float: right;">
+    <span class="close">X</span>
+  </button>
+</div>
+{% endfor %}
+ {% if user.is_authenticated %}
+    
+    <h4 class="user-heading">Hello, {{request.user.username}}</h4>
+
+<div class="main-dash">
+
+    <table class="table">
+  <tbody>
+    <tr>
+      <th scope="row">Username</th>
+      {% if edituserUsername == "active" %}
+      <td>
+        <div class="input-group input-group-sm mb-3" style="width: 80%;">
+            <form action="/update" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="username" readonly>
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="{{request.user.username}}"  name="username">
+          </div>
+      </td>
+        <td>  
+          <button type="submit" class="btn btn-primary">Save</button>
+        </td>
+      </form>
+  
+     
+      {% else %}
+
+      <td>{{username}}</td>
+      <td>
+        <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success" name="value" value="TrueUsername">Edit</button>
+      
+        </form>
+        </td>
+      
+
+      {% endif %}
+     
+       <td>
+          <form action="/delete" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="value" value="username" readonly>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          
+        
+    
+    </td>
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      {% if edituserEmail == "active" %}
+      <td>
+        <div class="input-group input-group-sm mb-3" style="width: 80%;">
+            <form action="/update" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="email" readonly>
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="{{request.user.email}}"  name="email">
+          </div>
+      </td>
+        <td>  
+          <button type="submit" class="btn btn-primary">Save</button>
+        </td>
+      </form>
+  
+     
+      {% else %}
+
+      <td>{{email}}</td>
+      <td>
+        <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success" name="value" value="TrueEmail">Edit</button>
+      
+        </form>
+        </td>
+      
+
+      {% endif %}
+      <td>
+          <form action="/delete" method="POST" onsubmit="return confirm('Deleting the email ID will delete of your details, and log you out')">
+            {% csrf_token %}
+            <input type="hidden" name="value" value="email" readonly>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          
+        
+    
+    </td>
+    </tr>
+    <tr>
+      <th scope="row">Address</th>
+      {% if edituserAdd == "active" %}
+      <td>
+        <div class="input-group input-group-sm mb-3" style="width: 80%;">
+            <form action="/update" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="address" readonly>
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="{{request.user.address}}"  name="address">
+          </div>
+      </td>
+        <td>  
+          <button type="submit" class="btn btn-primary">Save</button>
+        </td>
+      </form>
+  
+     
+      {% else %}
+
+      <td>{{address}}</td>
+      <td>
+        <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success" name="value" value="TrueAddress">Edit</button>
+      
+        </form>
+        </td>
+      
+
+      {% endif %}
+
+      <td>
+          <form action="/delete" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="value" value="address" readonly>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          
+        
+    
+    </td>
+    </tr>
+    
+  </tbody>
+</table>
+{% else %}
+<div class="heading" style="text-align: center; margin-top: 10%;">
+<h3 > Please <a href="login/" style="text-decoration: none;">login</a> to continue! </h3>
+</div>
+{% endif %}
+</div>
+
+{% endblock content %}
