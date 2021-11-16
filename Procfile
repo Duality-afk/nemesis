@@ -1,1 +1,1 @@
-web gunicorn nemesis.wsgi:application --log-file
+web: gunicorn nemesis.wsgi:application --log-file
