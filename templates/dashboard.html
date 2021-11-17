@@ -39,7 +39,6 @@
   
      
       {% else %}
-      
       {% if request.user.username == None %}
       <td></td>
       {% else %}
@@ -126,8 +125,7 @@
   
      
       {% else %}
-
-      {% if request.user.address == None %}
+ {% if request.user.address == None %}
       <td></td>
       {% else %}
       <td>{{address}}</td>
