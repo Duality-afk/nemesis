@@ -45,6 +45,9 @@ def registerpage(request):
         address =request.POST.get('address')
         password = request.POST.get('password')
         password1 = request.POST.get('confirmpassword')
+        if password !=password1:
+            messages.warning(request,"The passsword doesn't match")
+            return redirect("/register")
         
 
         user = Account.objects.create_user(email=email, username=username,password=password,address=address)
@@ -128,10 +131,10 @@ def delete(request):
         userdetails = Account.objects.get(username=request.user.username)
         value = request.POST.get('value')
         if value == "address":
-            userdetails.address = ""
+            userdetails.address = None
             userdetails.save()
         if value == "username":
-            userdetails.username = ""
+            userdetails.username = None
             userdetails.save()
         
         if value == "email":
