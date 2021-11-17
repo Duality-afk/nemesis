@@ -39,8 +39,12 @@
   
      
       {% else %}
-
+      
+      {% if request.user.username == None %}
+      <td></td>
+      {% else %}
       <td>{{username}}</td>
+      {% endif %}
       <td>
         <form method="POST">
         {% csrf_token %}
@@ -123,7 +127,11 @@
      
       {% else %}
 
+      {% if request.user.address == None %}
+      <td></td>
+      {% else %}
       <td>{{address}}</td>
+      {% endif %}
       <td>
         <form method="POST">
         {% csrf_token %}
