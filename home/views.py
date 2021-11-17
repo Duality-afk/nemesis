@@ -43,9 +43,11 @@ def registerpage(request):
             messages.warning(request,'username already exists')
             return redirect("/register")
         address =request.POST.get('address')
+    
         password = request.POST.get('password')
         password1 = request.POST.get('confirmpassword')
-        if password !=password1:
+
+        if password != password1:
             messages.warning(request,"The passsword doesn't match")
             return redirect("/register")
         
