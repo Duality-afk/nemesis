@@ -72,7 +72,7 @@ def registerpage(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
-        userdetails = Account.objects.get(username=request.user.username)
+        userdetails = Account.objects.get(email=request.user.email)
         email = userdetails.email
         username = userdetails.username
         address  = userdetails.address
@@ -128,7 +128,7 @@ def update(request):
 
 def delete(request):
     if request.method == "POST":
-        userdetails = Account.objects.get(username=request.user.username)
+        userdetails = Account.objects.get(email=request.user.email)
         value = request.POST.get('value')
         if value == "address":
             userdetails.address = None
